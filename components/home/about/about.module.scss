@@ -1,0 +1,66 @@
+.wrapper {
+    width: 100%;
+    padding: 15vh 0 15vh 0;
+    background: white;
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .ill_container {
+            width: 45%;
+            height: 70vh;
+            position: relative;
+            div {
+                background: var(--light-dark);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 85%;
+                height: 85%;
+            }
+            img {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 85%;
+                height: 85%;
+                object-fit: cover;
+            }
+        }
+        .content {
+            width: 50%;
+            .box {
+                width: 100%;
+                background: var(--light-dark);
+                padding: 5vh 2vw 5vh 2vw;
+                color: white;
+                h2 {
+                    font-weight: 400;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+                }
+                p {
+                    padding-top: 2vh;
+                    line-height: 2rem;
+                }
+            }
+            .cards {
+                padding-top: 4vh;
+                display: flex;
+                justify-content: space-between;
+                .card {
+                    width: 30%;
+                    span {
+                        font-family: 'Barlow Condensed', sans-serif;
+                        font-size: 2rem;
+                        font-weight: 600;
+                    }
+                    p {
+                        margin-top: 1vh;
+                        font-size: .85rem;
+                    }
+                }
+            }
+        }
+    }
+}
