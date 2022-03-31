@@ -8,7 +8,7 @@ export default function Banner () {
         <section className='wrapping'>
             <div className={style.wrapper}>
             <div className={style.content}>
-                <h1>La protections qu'il vous faut !</h1>
+                <h1>Les protections qu'il vous faut !</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eros tellus, semper a sagittis iaculis, laoreet ut leo. Duis non sodales dui, ut facilisis risus.</p>
                 <Link href="/catalogue">
                     <a>

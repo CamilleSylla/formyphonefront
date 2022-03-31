@@ -1,0 +1,37 @@
+.wrapper {
+    width: 100%;
+    background: red;
+    background: #F2F2F2;
+    .container {
+        height: 10vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Barlow Condensed', sans-serif;
+        .logo {
+            font-weight: 600;
+            font-size: 2rem;
+            width: 15vw;
+        }
+        ul {
+            width: 100%;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3vw;
+            text-transform: uppercase;
+            font-weight: 600;
+            li {
+                cursor: pointer;
+            }
+        }
+        .user_action {
+            width: 10vw;
+            display: flex;
+            justify-content: space-between;
+            img {
+                height: 3vh;
+            }
+        }
+    }
+}
