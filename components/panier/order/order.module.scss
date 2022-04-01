@@ -1,0 +1,35 @@
+.wrapper {
+    width: 22.5%;
+    border: 3px solid #cfcece;
+    border-radius: 10px;
+    align-self: flex-start;
+    h1 {
+        width: 100%;
+        text-align: center;
+        padding: 2vh 0 2vh 0;
+        text-transform: uppercase;
+    }
+    .item {
+        padding: 2vh 0 2vh 0;
+        display: flex;
+        justify-content: space-between;
+        h3 {
+            width: 80%;
+        }
+        p {
+            font-size: 1rem;
+            align-self: flex-end;
+        }
+    }
+    .total {
+        border-top: 3px solid #cfcece;
+
+        padding: 2vh 0 3vh 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        p {
+            align-self: flex-end;
+        }
+    }
+}

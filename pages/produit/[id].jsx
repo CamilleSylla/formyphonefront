@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Header from '../../components/global/Header'
 import Details from '../../components/produit/details/Details'
 import Product from '../../components/produit/product/Product'
 
@@ -6,10 +7,13 @@ export default function Produit ({product}) {
 
     return (
         <div className='wrapping'>
-            <div style={{display : "flex",justifyContent: "space-between", width: "100%"}}>
+            <Header/>
+            <main>
+            <div style={{display : "flex",justifyContent: "space-between", width: "100%", padding: "5vh 0 5vh 0"}}>
                 <Product product={product}/>
                 <Details details={product}/>
             </div>
+            </main>
         </div>
     )
 }
