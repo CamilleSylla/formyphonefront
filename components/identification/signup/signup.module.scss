@@ -1,0 +1,35 @@
+.wrapper {
+    width: 50%;
+    height: 100%;
+    background: var(--light-dark);
+    color: #F2F2F2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .container {
+        width: 80%;
+        padding: 5vh 2vw 5vh 2vw;
+        border-radius: 10px;
+        h2 {
+            text-transform: uppercase;
+        }
+        .form {
+            label {
+                display: block;
+                padding-top: 3vh;
+                width: 100%;
+                input {
+                    margin-top: 1vh;
+                    width: 70%;
+                    display: block;
+                    padding: 1.25vh 0 1.25vh 1vw;
+                    background: transparent;
+                    color: #cfcece;
+                    border: none;
+                    border-bottom: 1.5px solid #cfcece;
+                }
+            }
+        }
+    }
+    
+}

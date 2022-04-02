@@ -1,0 +1,35 @@
+.wrapper {
+    width: 50%;
+    height: 100%;
+    background: url("https://images.unsplash.com/flagged/photo-1594344141311-8ea00ba55612?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .container {
+        width: 80%;
+        padding: 5vh 2vw 5vh 2vw;
+        border-radius: 10px;
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.5);
+        h2 {
+            text-transform: uppercase;
+        }
+        .form {
+            label {
+                display: block;
+                padding-top: 3vh;
+                width: 100%;
+                input {
+                    margin-top: 1vh;
+                    width: 70%;
+                    display: block;
+                    padding: 1.25vh 0 1.25vh 1vw;
+                    background: transparent;
+                    border: none;
+                    border-bottom: 1.5px solid #cfcece;
+                }
+            }
+        }
+    }
+}

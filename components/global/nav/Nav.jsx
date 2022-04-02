@@ -45,7 +45,7 @@ export default function Nav() {
             })}
           </ul>
           <div className={style.user_action}>
-            <Link href={user ? `/utilisateur/${user.id}` : "/inscription"}>
+            <Link href={user ? `/utilisateur/${user.id}` : "/identification"}>
             <img src="/assets/icon/user.svg" />
             </Link>
             <img src="/assets/icon/like.svg" />

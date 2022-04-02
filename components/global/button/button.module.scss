@@ -1,4 +1,4 @@
-.wrapper {
+.primary__btn {
     margin-top: 5vh;
     padding: .75vw 2vw .75vw 2vw;
     background: var(--light-dark);
@@ -19,4 +19,15 @@
     font-weight: 500;
     border: none;
     text-transform: uppercase;
+}
+.secondary__btn {
+    margin-top: 5vh;
+    padding: .75vw 2vw .75vw 2vw;
+    background: #F2F2F2;
+    border: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--light-dark) ;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.35rem;
 }
