@@ -1,0 +1,17 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    .ill {
+        width: 50%;
+        background: url('https://images.unsplash.com/flagged/photo-1574164908900-6275ca361157?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80');
+        background-size: cover;
+    }
+    .content {
+        padding: 5vh 0 5vh 0;
+        width: 50%;
+        h3 {
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+    }
+}
