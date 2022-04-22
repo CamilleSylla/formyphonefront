@@ -13,12 +13,17 @@ export default function Items() {
         const onQuantityChange = (e) => {
           item.quantity = e.target.value;
         };
+        const { title,image, price, category, modele, souscategory, marque, tags, desc } = item.attributes;
+
         return (
           <article key={`panier/${item.name + i}`} className={style.item}>
-            <img src={item.image} />
+            <img src={process.env.NEXT_PUBLIC_API_PRODUCT + image.data.attributes.url} />
             <div className={style.content}>
-              <h2>{item.title}</h2>
-              <p>{item.description.length > 70 ? item.description.substring(0,75)+"..." : item.description}</p>
+              <h2>{title}</h2>
+              <h2>{category.data.attributes.name} - {souscategory.data.attributes.name}</h2>
+      <h3> {marque.data.attributes.name} - {modele.data.attributes.name} </h3>
+      {/* <h4> {slugsJoin} </h4> */}
+              <p>{desc.length > 70 ? desc.substring(0,75)+"..." : desc}</p>
               <div className={style.inline}>
                 <input
                   onChange={(e) => onQuantityChange(e)}
@@ -29,7 +34,7 @@ export default function Items() {
                 />
                 <p>Quantité</p>
               </div>
-              <p className={style.price}><strong><span>{item.price * item.quantity}€</span></strong></p>
+              <p className={style.price}><strong><span>{Math.round((price * item.quantity) * 100) / 100}€</span></strong></p>
             </div>
           </article>
         );

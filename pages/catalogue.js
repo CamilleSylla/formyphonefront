@@ -17,8 +17,8 @@ export default function Catalogue ({products}) {
 }
 export async function getServerSideProps(context) {
 
-    const products = await axios.get('http://localhost:3000/api/allproduct')
-    .then(res => res.data)
+    const products = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + '/api/articles?populate=*')
+    .then(res => res.data.data)
     return {
       props: {
           products

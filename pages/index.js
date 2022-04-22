@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Header from '../components/global/Header'
 import About from '../components/home/about/About'
 import Banner from '../components/home/banner/Banner'

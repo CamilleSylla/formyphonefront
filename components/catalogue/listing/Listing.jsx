@@ -7,7 +7,7 @@ export default function Listing ({products}) {
         <div className='wrapping'>
         <section className={style.wrapper}>
             {products.map((item, i) => {
-                return <ProductCard key={item.name + item.i} data={item}/>
+                return <ProductCard key={item.attributes.name + i} id={item.id} data={item.attributes}/>
             })}
         </section>
         </div>

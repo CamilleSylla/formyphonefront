@@ -10,8 +10,8 @@ export default function Produit ({product}) {
             <Header/>
             <main>
             <div style={{display : "flex",justifyContent: "space-between", width: "100%", padding: "5vh 0 5vh 0"}}>
-                <Product product={product}/>
-                <Details details={product}/>
+                <Product product={product.data}/>
+                <Details details={product.data}/>
             </div>
             </main>
         </div>
@@ -21,9 +21,7 @@ export default function Produit ({product}) {
 export async function getServerSideProps (props) {
 
     const { params } = props
-    const product = await axios.post(`http://localhost:3000/api/produit`, {
-        id : params.id
-    })
+    const product = await axios.get( process.env.NEXT_PUBLIC_API_PRODUCT + `/api/articles/${params.id}?populate=*`)
     .then(res => res.data)
     .catch(err => err)
 

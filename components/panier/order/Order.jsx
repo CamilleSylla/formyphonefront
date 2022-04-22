@@ -7,7 +7,7 @@ export default function Order () {
     const [cart, setCart] = useContext(CartContext)
 
     const total = cart.map(item => {
-        return item.quantity * item.price
+        return item.quantity * item.attributes.price
     }).reduce((partialSum, a) => partialSum + a, 0)
 
 
@@ -16,10 +16,12 @@ export default function Order () {
             <div className='wrapping'>
             <h1>Résumé de votre commande</h1>
             {cart.map((item, i) => {
+                        const { title, price } = item.attributes;
+
                 return (
                     <div className={style.item}>
-                    <h3>{item.title} x {item.quantity}</h3>
-                    <p>{item.price * item.quantity}€</p>
+                    <h3>{title} x {item.quantity}</h3>
+                    <p>{Math.round((price * item.quantity) * 100) / 100}€</p>
                     </div>    
                 )
             })}
