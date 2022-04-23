@@ -3,20 +3,16 @@ import React, { useState, createContext, useEffect } from "react";
 
 export const MenuContext = createContext();
 
+
+
 export function MenuProvider(props) {
-    const [menu, setMenu] = useState(null)
+    const [menu, setMenu] = useState([])
 
-     
-
-  useEffect(() => {
-    
-    const result = async () => await axios.get( process.env.NEXT_PUBLIC_API_PRODUCT + "/api/categories?populate=*")
-    .then(res => res.data)
-
-    console.log(result());
-
-  }, [])
-
+    useEffect(() => {
+        const getMenu = axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/categories?populate=*")
+.then(res => setMenu(res.data.data))
+.catch(error => alert(error))
+    }, [])
   return (
     <MenuContext.Provider value={[menu, setMenu]}>
       {props.children}

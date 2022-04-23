@@ -1,10 +1,9 @@
 import style from "./nav.module.scss";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "../../../context/CartContext";
 import { UserContext } from "../../../context/UserContext";
 import Categories from "./categories/Categories";
-import { MenuProvider } from "../../../context/MenuContext";
 
 const nav = [
   {
@@ -36,6 +35,7 @@ export default function Nav() {
     dropdown.addEventListener("mouseenter", () => {
       setOpen(true);
     });
+    
   }, []);
 
   return (
@@ -88,9 +88,7 @@ export default function Nav() {
           </div>
         </div>
       </div>
-      <MenuProvider>
-        <Categories open={open} setOpen={setOpen} />
-      </MenuProvider>
+        <Categories  open={open} setOpen={setOpen} />
     </nav>
   );
 }
