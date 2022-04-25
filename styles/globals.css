@@ -26,8 +26,13 @@ p {
   font-family: 'Nunito', sans-serif;
   font-size: 1.25rem;
 }
+button {
+  font-family: 'Barlow Condensed', sans-serif;
+}
 
-
+ul {
+  list-style: none;
+}
 a {
   color: inherit;
   text-decoration: none;

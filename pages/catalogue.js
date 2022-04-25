@@ -1,16 +1,21 @@
 import Header from "../components/global/Header";
 import axios from 'axios'
 import Listing from "../components/catalogue/listing/Listing";
+import Filters from "../components/catalogue/filters/Filters";
+import Promo from '../components/home/promo/Promo'
 
 
-
-export default function Catalogue ({products}) {
+export default function Catalogue ({products, filtersMenu}) {
 
     return (
         <div>
             <Header/>
             <main>
+                <Promo/>
+                <div style={{display : "flex",padding: "5vh 0 5vh 0", width : "80%", margin : "0 auto", justifyContent : "space-between"}}>
+                <Filters filtersMenu={filtersMenu}/>
                 <Listing products={products}/>
+                </div>
             </main>
         </div>
     )
@@ -18,6 +23,21 @@ export default function Catalogue ({products}) {
 export async function getServerSideProps(props) {
 
     const { query } = props
+
+    const filtersMenu = {}
+
+    const categoriesMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/categories?populate=*")
+    .then(res => filtersMenu.categories = res.data.data)
+    .catch(err => console.log(err.data))
+    const sousCategoriesMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/souscategories?populate=*")
+    .then(res => filtersMenu.souscategorie = res.data.data)
+    .catch(err => console.log(err.data))
+    const brandMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/categories?populate=*")
+    .then(res => filtersMenu.marques = res.data.data)
+    .catch(err => console.log(err.data))
+    const productMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/modeles?populate=*")
+    .then(res => filtersMenu.produits = res.data.data)
+    .catch(err => console.log(err.data))
 
     if (query.filter && query.filter === 'true') {
         let URL = process.env.NEXT_PUBLIC_API_PRODUCT + "/api/articles?populate=*"
@@ -31,8 +51,6 @@ export async function getServerSideProps(props) {
         const products = await axios.get(`${addFiltersUrl}`)
         .then(res => res.data.data)
         .catch(err => err.data)
-
-        console.log(URL ,products);
         return {
           props: {
               products
@@ -45,7 +63,8 @@ export async function getServerSideProps(props) {
         .catch(err => err)
         return {
           props: {
-              products
+              products,
+              filtersMenu
           }, // will be passed to the page component as props
         }
     }
