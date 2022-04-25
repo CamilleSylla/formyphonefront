@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import { MenuContext } from "../../../../context/MenuContext";
@@ -6,6 +7,7 @@ import style from "./categories.module.scss";
 export default function Categories({ open, setOpen }) {
   const [menu, setMenu] = useContext(MenuContext);
   const [subCat, setSubCat] = useState([]);
+  const [cat, setCat] = useState();
   const subRef = useRef();
   const router = useRouter()
 
@@ -21,7 +23,7 @@ export default function Categories({ open, setOpen }) {
             el.addEventListener('mouseenter', e => {
                 const findParentCat = menu.find(cat => cat.id == e.target.dataset.subcat)
                 if (findParentCat) {
-                    console.log(findParentCat.attributes.souscategories.data);
+                    setCat(findParentCat.attributes)
                     setSubCat(findParentCat.attributes.souscategories.data)
                 }
             })
@@ -36,13 +38,21 @@ export default function Categories({ open, setOpen }) {
           <ul>
             {menu.map((el, i) => {
                 const {name, souscategories} = el.attributes
-              return <li data-subcat={el.id} className="categories">{name}</li>;
+              return (
+              <Link href={{ pathname: '/catalogue', query: { filter : true, category: name } }}>
+                  <li data-subcat={el.id} className="categories">{name}</li>
+              </Link>
+              )
             })}
           </ul>
           <ul>
           {subCat.map((el, i) => {
                 const {name} = el.attributes
-              return <li data-subcat={el.id} className="categories">{name}</li>;
+              return (
+                  <Link href={{ pathname: '/catalogue', query: { filter : true, category: cat.name, souscategory: name } }}>
+              <li data-subcat={el.id} className="categories">{name}</li>
+                  </Link>
+              );
             })}
           </ul>
         </div>
