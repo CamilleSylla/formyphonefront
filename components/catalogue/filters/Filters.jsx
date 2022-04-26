@@ -7,16 +7,10 @@ export default function Filters ({filtersMenu}) {
 
     const router = useRouter()
 
-    const [activeMenu, setActiveMenu] = useState({
-        category : [],
-        souscategories : [],
-        marques : [],
-        modeles : []
-    })
     const [select, setSelect] = useState({
         filter : true,
         category : [],
-        souscategories : [],
+        souscategory : [],
         marques : [],
         modeles : []
     })
@@ -29,7 +23,7 @@ export default function Filters ({filtersMenu}) {
         },
         {
             label : "Sous-catégories",
-            onClickKey: "souscategories",
+            onClickKey: "souscategory",
             data : filtersMenu.souscategorie
         },
         {
@@ -44,6 +38,27 @@ export default function Filters ({filtersMenu}) {
         },
     ]
 
+    useEffect(() => {
+        const lists = Array.from(document.getElementsByTagName("ul"))
+        const keys = Object.keys(router.query)
+        const findActiveFilter = keys.map(key => {
+            const find = lists.find(list => list.id == key)
+            return find ? find : null
+        })
+        const getInput = findActiveFilter.map(el => {
+            const input = Array.from(el.getElementsByTagName("input"))
+            const getInputByValue = keys.map(key => {
+                const setInputStatus = input.map(el => {
+                    if (el.value === router.query[key]) {
+                        console.log(el.checked);
+                        setSelect({...select, [key] : [...select[key], el.value]})
+                        el.checked = true
+                    }
+                })
+            })
+        })
+    }, [])
+
 
     return (
         <div className={style.wrapper}>
@@ -54,34 +69,24 @@ export default function Filters ({filtersMenu}) {
                 {menuSplitByLabel.map((el, i) => {
                     const { label, data, onClickKey } = el
                     const key = onClickKey
+
+                    
                     return (
                     <li key={label+i}>
-                        <button onClick={() => {
-                            if (activeMenu[key].length > 0 ) {
-                                setActiveMenu({...activeMenu, [key] : []})
-                            } else {
-                                setActiveMenu({...activeMenu, [key] : data})
-                            }
-                        }}>
+                        <button>
                         {label}
-                        <span>{activeMenu[key].length === 0 ? "+": "-"} </span>
                         </button>
                         <div className={style.menu}>
-                            <ul>
-                                { activeMenu[key].map((el, i) => {
+                            <ul id={key}>
+                                { el.data.map((el, i) => {
                                     const {name} = el.attributes
-
-                                    function setCheckboxStatus () {
-                                        const keys = Object.keys(router.query)
-                                        
-                                        const verify = keys.filter(key => { if (router.query[key] == name) return name; })
-                                        if (verify) return "checked"
-                                    }
                                     return (
                                         <li>
-                                            <input type='checkbox' checked={setCheckboxStatus()} id={name} onChange={e => {
+                                            <input type='checkbox' id={name} value={name} onChange={e => {
                                                 setSelect({...select, [key] : [...select[key], e.target.value]})
-                                            }} value={name}/>
+                                                console.log(select);
+                                                e.target.checked === true ? false : true
+                                            }}/>
                                             <label>{name}</label>
                                         </li>
                                     )
