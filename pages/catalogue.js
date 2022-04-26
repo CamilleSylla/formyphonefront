@@ -47,7 +47,7 @@ export async function getServerSideProps(props) {
         const keys = Object.keys(filters)
 
         const addFiltersUrl = keys.map(key => URL += `&filters[$and][0][${key}][name][$eq]=${filters[key]}`)
-        console.log(addFiltersUrl[addFiltersUrl.length - 1]);
+        // console.log(addFiltersUrl[addFiltersUrl.length - 1]);
         const products = await axios.get(`${addFiltersUrl[addFiltersUrl.length - 1]}`)
         .then(res => res.data.data)
         .catch(err => err.data)

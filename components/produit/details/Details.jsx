@@ -4,29 +4,31 @@ import React from "react";
 import AddCartButton from "../../global/button/AddCartButton";
 
 export default function Details({ details }) {
-  console.log(details);
-  const { title, price, category, modele, souscategory, marque, tags } = details.attributes;
+  const { title, price, category, modeles, souscategory, marques, tags } = details.attributes;
   // const { rate, count } = details.rating;
   const slugsJoin = tags.data.map(el => {
     return el.attributes.Name
   }).join(", ");
   const stock = 10;
   details.quantity = 1;
-  console.log(souscategory);
   const onQuantityChange = (e) => {
     details.quantity = e.target.value;
-    console.log(details);
   };
 
   const ratingChanged = (newRating) => {
     console.log(newRating);
   };
-
   return (
     <section className={style.wrapper}>
       <h1>{title}</h1>
       <h2>{category.data.attributes.name} - {souscategory.data.attributes.name}</h2>
-      <h3> {marque.data.attributes.name} - {modele.data.attributes.name} </h3>
+      {/* <h3> {marque.data.attributes.name}  </h3> */}
+      <h3>
+         {marques.data.map((el, i) => {
+        return <span key={el.attributes.name+i}>{el.attributes.name} {i < marques.data.length - 1 ? ", " : null}</span>
+      })} - {modeles.data.map((el, i) => {
+        return <span key={el.attributes.name+i}>{el.attributes.name} {i < modeles.data.length - 1 ? ", " : null}</span>
+      })} </h3>
       <h4> {slugsJoin} </h4>
       <div className={style.inline}>
         {/* <ReactStars

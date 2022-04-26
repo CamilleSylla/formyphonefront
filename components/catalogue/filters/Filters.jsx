@@ -1,8 +1,11 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import style from './filters.module.scss'
 
 export default function Filters ({filtersMenu}) {
+
+    const router = useRouter()
 
     const [activeMenu, setActiveMenu] = useState({
         category : [],
@@ -41,15 +44,6 @@ export default function Filters ({filtersMenu}) {
         },
     ]
 
-    // const onValidateQuery = () => {
-    //     const keys = Object.keys(select)
-    //     const package = keys.map( key => {
-    //         if (select[key].length) {
-    //             console.log(key);
-    //         }
-    //     })
-    //     // const addFiltersUrl = keys.map(key => URL += `&filters[$and][0][${key}][name][$eq]=${filters[key]}`)
-    // }
 
     return (
         <div className={style.wrapper}>
@@ -76,9 +70,16 @@ export default function Filters ({filtersMenu}) {
                             <ul>
                                 { activeMenu[key].map((el, i) => {
                                     const {name} = el.attributes
+
+                                    function setCheckboxStatus () {
+                                        const keys = Object.keys(router.query)
+                                        
+                                        const verify = keys.filter(key => { if (router.query[key] == name) return name; })
+                                        if (verify) return "checked"
+                                    }
                                     return (
                                         <li>
-                                            <input type='checkbox' onChange={e => {
+                                            <input type='checkbox' checked={setCheckboxStatus()} id={name} onChange={e => {
                                                 setSelect({...select, [key] : [...select[key], e.target.value]})
                                             }} value={name}/>
                                             <label>{name}</label>
