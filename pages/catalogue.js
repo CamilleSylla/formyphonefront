@@ -32,7 +32,7 @@ export async function getServerSideProps(props) {
     const sousCategoriesMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/souscategories?populate=*")
     .then(res => filtersMenu.souscategorie = res.data.data)
     .catch(err => console.log(err.data))
-    const brandMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/categories?populate=*")
+    const brandMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/marques?populate=*")
     .then(res => filtersMenu.marques = res.data.data)
     .catch(err => console.log(err.data))
     const productMenu = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/modeles?populate=*")
@@ -47,13 +47,14 @@ export async function getServerSideProps(props) {
         const keys = Object.keys(filters)
 
         const addFiltersUrl = keys.map(key => URL += `&filters[$and][0][${key}][name][$eq]=${filters[key]}`)
-        
-        const products = await axios.get(`${addFiltersUrl}`)
+        console.log(addFiltersUrl[addFiltersUrl.length - 1]);
+        const products = await axios.get(`${addFiltersUrl[addFiltersUrl.length - 1]}`)
         .then(res => res.data.data)
         .catch(err => err.data)
         return {
           props: {
-              products
+              products,
+              filtersMenu
           }, // will be passed to the page component as props
         }
     } else {

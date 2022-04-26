@@ -1,38 +1,55 @@
+import Link from 'next/link'
 import { useState } from 'react'
 import style from './filters.module.scss'
 
 export default function Filters ({filtersMenu}) {
 
     const [activeMenu, setActiveMenu] = useState({
-        cat : [],
-        souscat : [],
-        brand : [],
-        product : []
+        category : [],
+        souscategories : [],
+        marques : [],
+        modeles : []
     })
-    const [select, setSelect] = useState([])
+    const [select, setSelect] = useState({
+        filter : true,
+        category : [],
+        souscategories : [],
+        marques : [],
+        modeles : []
+    })
 
     const menuSplitByLabel = [
         {
             label : "Catégories",
-            onClickKey: "cat",
+            onClickKey: "category",
             data : filtersMenu.categories
         },
         {
             label : "Sous-catégories",
-            onClickKey: "souscat",
+            onClickKey: "souscategories",
             data : filtersMenu.souscategorie
         },
         {
             label : "Marques",
-            onClickKey: "brand",
+            onClickKey: "marques",
             data : filtersMenu.marques
         },
         {
             label : "Produits",
-            onClickKey: "product",
+            onClickKey: "modeles",
             data : filtersMenu.produits
         },
     ]
+
+    // const onValidateQuery = () => {
+    //     const keys = Object.keys(select)
+    //     const package = keys.map( key => {
+    //         if (select[key].length) {
+    //             console.log(key);
+    //         }
+    //     })
+    //     // const addFiltersUrl = keys.map(key => URL += `&filters[$and][0][${key}][name][$eq]=${filters[key]}`)
+    // }
 
     return (
         <div className={style.wrapper}>
@@ -61,7 +78,9 @@ export default function Filters ({filtersMenu}) {
                                     const {name} = el.attributes
                                     return (
                                         <li>
-                                            <input type='checkbox' value={name}/>
+                                            <input type='checkbox' onChange={e => {
+                                                setSelect({...select, [key] : [...select[key], e.target.value]})
+                                            }} value={name}/>
                                             <label>{name}</label>
                                         </li>
                                     )
@@ -72,6 +91,10 @@ export default function Filters ({filtersMenu}) {
                     )
                 })}
             </ul>
+            {/* <button onClick={onValidateQuery}>Valider</button> */}
+            <Link href={{ pathname: '/catalogue', query: select }}>
+            <button >Valider</button>
+            </Link>
         </div>
     )
 }
