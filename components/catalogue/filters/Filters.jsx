@@ -83,8 +83,12 @@ export default function Filters ({filtersMenu}) {
                                     return (
                                         <li>
                                             <input type='checkbox' id={name} value={name} onChange={e => {
-                                                setSelect({...select, [key] : [...select[key], e.target.value]})
                                                 console.log(select);
+                                                if (!select[key].includes(e.target.value)) {
+                                                    setSelect({...select, [key] : [...select[key], e.target.value]})
+                                                } else {
+                                                    select[key].splice(select[key].indexOf(e.target.value), 1);
+                                                }
                                                 e.target.checked === true ? false : true
                                             }}/>
                                             <label>{name}</label>
