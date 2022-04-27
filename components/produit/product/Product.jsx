@@ -25,6 +25,10 @@ export default function Product ({product}) {
                                 return <ul>{data.items.map((el, i) => {
                                     return <li>{el.text}</li>
                                 })}</ul>
+                            case "list":
+                                return <ul>{data.items.map((el, i) => {
+                                    return <li>{el}</li>
+                                })}</ul>
                             default:
                                 return <p>{data.text}</p>
                         }
