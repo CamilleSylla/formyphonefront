@@ -4,7 +4,6 @@ export default function Product ({product}) {
     const {image, desc, galerie} = product.attributes
     const gallery = galerie.data ? [...galerie.data, image.data] : [image.data]
     const convertToJSON = JSON.parse(desc)
-    console.log(convertToJSON);
     const { blocks } = convertToJSON
     return( 
         <section className={style.wrapper}>

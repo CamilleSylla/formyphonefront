@@ -1,6 +1,6 @@
 .wrapper {
     width: 60%;
-    background: #dddddd;
+    // background: #dddddd;
     border-radius: 1rem;
 overflow: hidden;
     img {
@@ -9,9 +9,11 @@ overflow: hidden;
         object-fit: contain;
         background: white;
         padding: 2vh 0 2vh 0;
+        border-bottom-right-radius: 1rem;
+        border-bottom-left-radius: 1rem;
     }   
     .desc {
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
         padding: 5vh 0 5vh 0;
         h2, h3 {
