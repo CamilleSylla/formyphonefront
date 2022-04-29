@@ -8,7 +8,15 @@ export default function CarouselBanner({ thumbs }) {
   console.log(thumbs);
 
   return (
-    <Carousel className={style.wrapper} autoPlay>
+    <Carousel 
+    className={style.wrapper} 
+    autoPlay
+    stopOnHover={false}
+    infiniteLoop
+    showStatus={false}
+    showThumbs={false}
+    interval={5000}
+    >
       {thumbs.map((el, i) => {
         const {title, desc, color, image} = el.attributes
         return (
