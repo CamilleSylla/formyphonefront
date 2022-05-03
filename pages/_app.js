@@ -6,6 +6,8 @@ import { CookiesProvider } from "react-cookie";
 import { MenuProvider } from "../context/MenuContext";
 
 function MyApp({ Component, pageProps }) {
+
+  
   return (
     <>
     <MenuProvider>
@@ -14,6 +16,7 @@ function MyApp({ Component, pageProps }) {
           <UserProvider>
             <Nav />
             <Component {...pageProps} />
+            <script src="https://js.stripe.com/v3/"></script>
           </UserProvider>
         </CartProvider>
       </CookiesProvider>

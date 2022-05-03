@@ -43,7 +43,6 @@ export default function Filters({ filtersMenu }) {
       const filterInputByActiveCat = inputs.filter(
         (input) => input.dataset.cat == key
       );
-      console.log(filterInputByActiveCat);
       const findActiveInputs = filterInputByActiveCat.filter(
         (input) => input.value == router.query[key]
       );
@@ -86,7 +85,7 @@ export default function Filters({ filtersMenu }) {
                   {el.data.map((el, i) => {
                     const { name } = el.attributes;
                     return (
-                      <li>
+                      <li key={name+i}>
                         <input
                           type="checkbox"
                           data-cat={key}
