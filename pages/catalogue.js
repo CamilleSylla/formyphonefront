@@ -5,7 +5,8 @@ import Filters from "../components/catalogue/filters/Filters";
 import Promo from "../components/home/promo/Promo";
 import qs from "qs";
 
-export default function Catalogue({ products, filtersMenu }) {
+export default function Catalogue({ products, filtersMenu, test }) {
+  console.log(test);
   return (
     <div>
       <Header />
@@ -21,7 +22,7 @@ export default function Catalogue({ products, filtersMenu }) {
           }}
         >
           <Filters filtersMenu={filtersMenu} />
-          {/* <Listing products={products}/> */}
+          <Listing products={products} />
         </div>
       </main>
     </div>
@@ -34,22 +35,43 @@ export async function getServerSideProps(props) {
 
   const keys = Object.keys(userQuery);
 
+  let products;
+
   if (keys.length) {
     const res = keys.map((key) => {
-      return { [key]: { $or: [userQuery[key]] } };
+      return { $or: [{ [key]: { name: { $eq: [userQuery[key]] } } }] };
     });
-    const $and = Object.assign.apply(null, res);
 
-    const query = qs.stringify(
-      { filters : $and },
-      {
-        encodeValuesOnly: true, // prettify url
-      }
-    );
-    // console.log({filters});
-    console.log(`/api/articles?${query}`);
+    const newQS = res.map((el) => {
+      const filters = el;
+      const query = qs.stringify(
+        { filters },
+        {
+          encodeValuesOnly: true, // prettify url
+        }
+      );
+      return query;
+    });
+
+    let finalQuery = process.env.NEXT_PUBLIC_API_PRODUCT;
+
+    const createQuery = newQS.map((params, i) => {
+      finalQuery += `${i == 0 ? "/api/articles?populate=*&" : "&"}${params}`;
+      return params
+    });
+
+    const getFilteredItems = await axios
+      .get(finalQuery)
+      .then((res) => res.data.data)
+      .catch((err) => err.data);
+
+    products = getFilteredItems;
   } else {
-    console.log("false", keys);
+    const getAllItems = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + "/api/articles?populate=*")
+    .then((res) => res.data.data)
+      .catch((err) => err.data);
+
+    products = getAllItems;
   }
 
   const categoriesMenu = await axios
@@ -71,38 +93,8 @@ export async function getServerSideProps(props) {
 
   return {
     props: {
-      test: "lol",
+      products,
       filtersMenu,
     },
   };
-  // if (query.filter && query.filter === 'true') {
-  //     let URL = process.env.NEXT_PUBLIC_API_PRODUCT + "/api/articles?populate=*"
-
-  //     const removeFilterKey = delete query.filter
-  //     const filters = query
-  //     const keys = Object.keys(filters)
-
-  //     const addFiltersUrl = keys.map(key => URL += `&filters[$and][0][${key}][name][$eq]=${filters[key]}`)
-  //     console.log(addFiltersUrl[addFiltersUrl.length - 1]);
-  //     const products = await axios.get(`${addFiltersUrl[addFiltersUrl.length - 1]}`)
-  //     .then(res => res.data.data)
-  //     .catch(err => err.data)
-  //     return {
-  //       props: {
-  //           products,
-  //           filtersMenu
-  //       }, // will be passed to the page component as props
-  //     }
-  // } else {
-
-  //     const products = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCT + '/api/articles?populate=*')
-  //     .then(res => res.data.data)
-  //     .catch(err => err)
-  //     return {
-  //       props: {
-  //           products,
-  //           filtersMenu
-  //       }, // will be passed to the page component as props
-  //     }
-  // }
 }

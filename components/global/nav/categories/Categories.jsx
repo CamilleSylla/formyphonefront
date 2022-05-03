@@ -39,7 +39,7 @@ export default function Categories({ open, setOpen }) {
             {menu.map((el, i) => {
                 const {name, souscategories} = el.attributes
               return (
-              <Link href={{ pathname: '/catalogue', query: { filter : true, category: name } }}>
+              <Link href={{ pathname: '/catalogue', query: { category: name } }}>
                   <li data-subcat={el.id} className="categories">{name}</li>
               </Link>
               )
@@ -49,7 +49,7 @@ export default function Categories({ open, setOpen }) {
           {subCat.map((el, i) => {
                 const {name} = el.attributes
               return (
-                  <Link href={{ pathname: '/catalogue', query: { filter : true, category: cat.name, souscategory: name } }}>
+                  <Link href={{ pathname: '/catalogue', query: { category: cat.name, souscategory: name } }}>
               <li data-subcat={el.id} className="categories">{name}</li>
                   </Link>
               );
