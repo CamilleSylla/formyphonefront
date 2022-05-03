@@ -8,7 +8,7 @@ export default function Filters ({filtersMenu}) {
     const router = useRouter()
 
     const [select, setSelect] = useState({
-        filter : true,
+        // filter : true,
         category : [],
         souscategory : [],
         marques : [],
@@ -38,26 +38,26 @@ export default function Filters ({filtersMenu}) {
         },
     ]
 
-    useEffect(() => {
-        const lists = Array.from(document.getElementsByTagName("ul"))
-        const keys = Object.keys(router.query)
-        const findActiveFilter = keys.map(key => {
-            const find = lists.find(list => list.id == key)
-            return find ? find : null
-        })
-        const getInput = findActiveFilter.map(el => {
-            const input = Array.from(el.getElementsByTagName("input"))
-            const getInputByValue = keys.map(key => {
-                const setInputStatus = input.map(el => {
-                    if (el.value === router.query[key]) {
-                        console.log(el.checked);
-                        setSelect({...select, [key] : [...select[key], el.value]})
-                        el.checked = true
-                    }
-                })
-            })
-        })
-    }, [])
+    // useEffect(() => {
+    //     const lists = Array.from(document.getElementsByTagName("ul"))
+    //     const keys = Object.keys(router.query)
+    //     const findActiveFilter = keys.map(key => {
+    //         const find = lists.find(list => list.id == key)
+    //         return find ? find : null
+    //     })
+    //     const getInput = findActiveFilter.map(el => {
+    //         const input = Array.from(el.getElementsByTagName("input"))
+    //         const getInputByValue = keys.map(key => {
+    //             const setInputStatus = input.map(el => {
+    //                 if (el.value === router.query[key]) {
+    //                     console.log(el.checked);
+    //                     setSelect({...select, [key] : [...select[key], el.value]})
+    //                     el.checked = true
+    //                 }
+    //             })
+    //         })
+    //     })
+    // }, [])
 
 
     return (
