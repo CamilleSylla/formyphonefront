@@ -43,7 +43,7 @@ export default function Nav() {
       <div className="wrapping">
         <div className={style.container}>
           <Link href="/">
-            <div className={style.logo}>FORMYPHONE</div>
+            <div className={style.logo}>FORMYFONE</div>
           </Link>
           <ul>
             {nav.map((el, i) => {

@@ -5,8 +5,7 @@ import Filters from "../components/catalogue/filters/Filters";
 import Promo from "../components/home/promo/Promo";
 import qs from "qs";
 
-export default function Catalogue({ products, filtersMenu, test }) {
-  console.log(test);
+export default function Catalogue({ products, filtersMenu}) {
   return (
     <div>
       <Header />

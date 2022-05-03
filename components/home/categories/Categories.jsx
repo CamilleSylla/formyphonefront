@@ -13,7 +13,6 @@ export default function Categories({ categories }) {
               href={{
                 pathname: "/catalogue",
                 query: {
-                  filter: true,
                   category: categorie.data.attributes.name,
                   souscategory: name,
                 },
