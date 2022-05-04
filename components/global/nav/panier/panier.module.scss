@@ -1,0 +1,101 @@
+.wrapper {
+    position: absolute;
+    right: 5%;
+    width: 25%;
+    background: #F2F2F2;
+    z-index: 2;
+    transition: all cubic-bezier(.36,.92,.67,.92) 1s;
+    .head {
+        padding: 2vh 0 2vh 0;
+        width: 100%;
+        background: rgb(207, 207, 207);
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            margin: 0 auto;
+            h5 {
+                text-transform: uppercase;
+                font-size: 1.25rem;
+                span {
+                    text-transform: initial;
+                }
+            }
+            img {
+                width: 2vw;
+                cursor: pointer;
+            }
+        }
+        
+    }
+    .action {
+        padding: 2vh 0 2vh 0;
+        div {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin: 0 auto;
+            button {
+                height: 7vh;
+                width: 48%;
+                border: none;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+        }
+    }
+    .items {
+        max-height: 40vh;
+        overflow-y: scroll;
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            .article_wrapper {
+                padding: 2vh 0 2vh 0;
+                border-top: .5px solid lightgrey ;
+                border-bottom: .5px solid lightgrey ;
+                .article {
+                    cursor: pointer;
+                    width: 95%;
+                    margin: 0 auto;
+                    display: flex;
+                    justify-content: space-between;
+                    .art_img {
+                        width: 7vw;
+                        height: 10vw;
+                        object-fit: cover;
+                    }
+                    .info {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        width: 60%;
+                        span {
+                            display: block;
+                            font-family: 'Nunito', sans-serif;
+                            font-weight: 800;
+                        }
+                        p {
+                            span {
+                                font-weight: 600;
+                                display: initial;
+                            }
+                            font-weight: 600;
+                            font-size: .85rem;
+                        }
+                        .bottom {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            img {
+                                height: 2vh;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

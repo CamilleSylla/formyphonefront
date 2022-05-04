@@ -3,6 +3,8 @@
     background: red;
     background: #F2F2F2;
     border-bottom:1px solid grey;
+    position: relative;
+    z-index: 2;
     .container {
         height: 10vh;
         display: flex;

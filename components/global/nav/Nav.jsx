@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "../../../context/CartContext";
 import { UserContext } from "../../../context/UserContext";
 import Categories from "./categories/Categories";
+import Panier from "./panier/Panier";
 
 const nav = [
   {
@@ -29,16 +30,30 @@ export default function Nav() {
   const [cart, setCart] = useContext(CartContext);
   const [user, setUser] = useContext(UserContext);
   const [open, setOpen] = useState(false);
+  const [panier, setPanier] = useState(false)
+  const panierRef = useRef()
 
   useEffect(() => {
     const dropdown = document.getElementById("dropdown");
     dropdown.addEventListener("mouseenter", () => {
       setOpen(true);
+
+      
     });
+
+      panierRef.current.addEventListener('mouseenter', () => {
+        
+        if (cart.length) {
+          setPanier(true)
+        }
+      })
+    
     
   }, []);
 
   return (
+    <>
+    <Panier setCart={setCart} setOpen={setPanier} cart={cart} open={panier}/>
     <nav className={style.wrapper}>
       <div className="wrapping">
         <div className={style.container}>
@@ -59,9 +74,8 @@ export default function Nav() {
               <img src="/assets/icon/user.svg" />
             </Link>
             <img src="/assets/icon/like.svg" />
-            <Link href="/panier">
               <div style={{ position: "relative" }}>
-                <img src="/assets/icon/cart.svg" />
+                <img ref={panierRef} src="/assets/icon/cart.svg" />
                 {cart.length ? (
                   <p
                     style={{
@@ -84,11 +98,11 @@ export default function Nav() {
                   </p>
                 ) : null}
               </div>
-            </Link>
           </div>
         </div>
       </div>
         <Categories  open={open} setOpen={setOpen} />
     </nav>
+   </>
   );
 }

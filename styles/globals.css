@@ -8,6 +8,8 @@ body {
   margin: 0;
   background: #F2F2F2;
   font-size: 1vw;
+  width: 100%;
+  overflow-x: hidden;
 }
 * {
   margin: 0;
@@ -19,7 +21,7 @@ body {
   height: auto;
   margin: 0 auto;
 }
-h1, h2, h3, h4, label, li, input {
+h1, h2, h3, h4, h5, label, li, input {
   font-family: 'Barlow Condensed', sans-serif;
 }
 p {
