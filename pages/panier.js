@@ -8,7 +8,9 @@ import { CartContext } from "../context/CartContext";
 import { UserContext } from "../context/UserContext";
 
 export default function Panier(props) {
-  const [stripePromise, setStripePromise] = useState(() => loadStripe(process.env.NEXT_PUBLIC_STRIPE_PK));
+  const [stripePromise, setStripePromise] = useState(() =>
+    loadStripe(process.env.NEXT_PUBLIC_STRIPE_PK)
+  );
   const [user, setUser] = useContext(UserContext);
   const [cart, setCart] = useContext(CartContext);
 
@@ -24,9 +26,9 @@ export default function Panier(props) {
             padding: "5vh 0 5vh 0",
           }}
         >
-          <Items/>
+          <Items />
           <Elements stripe={stripePromise}>
-            <Order/>
+            <Order />
           </Elements>
         </div>
       </main>

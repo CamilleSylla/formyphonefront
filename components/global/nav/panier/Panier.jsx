@@ -5,7 +5,7 @@ import style from "./panier.module.scss";
 
 export default function Panier({ open, setOpen, cart, setCart }) {
   const wrapperRef = useRef();
-const router = useRouter()
+  const router = useRouter();
 
   const total = cart
     .map((item) => {
@@ -13,17 +13,17 @@ const router = useRouter()
     })
     .reduce((partialSum, a) => partialSum + a, 0);
 
-    const removeFromCart = id => {
-        const newCart = cart.filter(item => {
-            return item.id !== id
-        }) 
-        setCart(newCart)
-    }
+  const removeFromCart = (id) => {
+    const newCart = cart.filter((item) => {
+      return item.id !== id;
+    });
+    setCart(newCart);
+  };
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
 
-    if (router.pathname === '/panier') setOpen(false)
+    if (router.pathname === "/panier") setOpen(false);
 
     if (cart.length) {
       wrapper.addEventListener("mouseleave", () => {
@@ -60,25 +60,51 @@ const router = useRouter()
           {cart.map((el, i) => {
             const { marques, title, modeles, image, price } = el.attributes;
             return (
-                <div className={style.article_wrapper}>
+              <div className={style.article_wrapper}>
                 <div className={style.article}>
                   <Link href={`/produit/${el.id}`}>
-                  <img className={style.art_img} src={process.env.NEXT_PUBLIC_API_PRODUCT + image.data.attributes.url} alt={"formyfone " + title}/>
-              </Link>
+                    <img
+                      className={style.art_img}
+                      src={
+                        process.env.NEXT_PUBLIC_API_PRODUCT +
+                        image.data.attributes.url
+                      }
+                      alt={"formyfone " + title}
+                    />
+                  </Link>
                   <div className={style.info}>
-                  <Link href={`/produit/${el.id}`}>
+                    <Link href={`/produit/${el.id}`}>
                       <>
-                    <span>{price}€</span>
-                    <p>{marques.data.map((el, i) => {
-        return <span key={el.attributes.name+i}>{el.attributes.name} {i < marques.data.length - 1 ? ", " : null}</span>
-      })}, {modeles.data.map((el, i) => {
-        return <span key={el.attributes.name+i}>{el.attributes.name} {i < modeles.data.length - 1 ? ", " : null}</span>
-      })} - {title}</p>
+                        <span>{price}€</span>
+                        <p>
+                          {marques.data.map((el, i) => {
+                            return (
+                              <span key={el.attributes.name + i}>
+                                {el.attributes.name}{" "}
+                                {i < marques.data.length - 1 ? ", " : null}
+                              </span>
+                            );
+                          })}
+                          ,{" "}
+                          {modeles.data.map((el, i) => {
+                            return (
+                              <span key={el.attributes.name + i}>
+                                {el.attributes.name}{" "}
+                                {i < modeles.data.length - 1 ? ", " : null}
+                              </span>
+                            );
+                          })}{" "}
+                          - {title}
+                        </p>
                       </>
-              </Link>
+                    </Link>
                     <div className={style.bottom}>
-                    <p>Qte : {el.quantity}</p>
-                    <img onClick={() => removeFromCart(el.id)} src="/assets/icon/trash.svg" alt="formyphone - trash"/>
+                      <p>Qte : {el.quantity}</p>
+                      <img
+                        onClick={() => removeFromCart(el.id)}
+                        src="/assets/icon/trash.svg"
+                        alt="formyphone - trash"
+                      />
                     </div>
                   </div>
                 </div>
@@ -87,19 +113,26 @@ const router = useRouter()
           })}
         </div>
       </div>
-      <div className={style.head} style={{backgorund : "#F2F2F2", borderTop : ".5px solid lightgrey"}} >
-          <div>
+      <div
+        className={style.head}
+        style={{ backgorund: "#F2F2F2", borderTop: ".5px solid lightgrey" }}
+      >
+        <div>
           <h5>Sous-total : </h5>
           <p>{total}€</p>
-          </div>
+        </div>
       </div>
       <div className={style.action}>
-          <div>
-              <Link href="/panier">
-          <button style={{background : "lightgrey"}}>Voir panier</button>
-              </Link>
-          <button style={{background : "green", color: "#F2F2F2"}}>Payer</button>
-          </div>
+        <div>
+          <Link href="/panier">
+            <button style={{ background: "lightgrey" }}>Voir panier</button>
+          </Link>
+          <Link href="/paiement">
+          <button style={{ background: "green", color: "#F2F2F2" }}>
+            Payer
+          </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

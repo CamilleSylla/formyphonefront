@@ -1,0 +1,39 @@
+.wrapper {
+    width: 60%;
+    .container {
+        background: white;
+        margin-bottom: 2vh;
+        padding: 5vh 0 5vh 0;
+        .box {
+            width: 90%;
+            margin: 0 auto;
+            h3 {
+                text-transform: uppercase;
+                margin-bottom: 3vh;
+            }
+            input {
+                border: none;
+                border-bottom: 2px solid lightgray;
+            }
+            .contry_wrapper {
+                display: flex;
+                gap: 2vw;
+                .flag {
+                    height: 7vh;
+                    width: 7vh;
+                    border: 2px solid lightgrey;
+                    border-radius: 50%;
+                    background-size: 100%;
+                }
+                select {
+                    font-family: 'Nunito', sans-serif;
+                    font-weight: 700;
+                    padding-right: 2vw;
+                    border: none;
+                    option {
+                    }
+                }
+            }
+        }
+    }
+}
